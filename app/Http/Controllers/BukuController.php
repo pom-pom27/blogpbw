@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Blog;
 use Illuminate\Http\Request;
+use App\Buku;
 
-class BlogController extends Controller
+
+class BukuController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,14 +15,13 @@ class BlogController extends Controller
      */
     public function index()
     {
-        $DataBlogs = Blog::get();
-        return view('blog/list', compact('DataBlogs'));
+        $DataBuku = Buku::get();
+        return view('buku/list', compact('DataBuku'));
     }
 
-
-    public function add_blog()
+    public function add_buku()
     {
-        return view('blog/add');
+        return view('buku/add');
     }
 
     /**
@@ -30,7 +30,9 @@ class BlogController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    { }
+    {
+        //
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -41,78 +43,66 @@ class BlogController extends Controller
     public function store(Request $request)
     {
         $name = '';
-        if ($request->hasfile('filename')) {
-            $file = $request->file('filename');
+        if ($request->hasfile('gambar')) {
+            $file = $request->file('gambar');
             $name = time() . $file->getClientOriginalName();
             $file->move(public_path() . '/images/', $name);
         }
 
-        $blog = new Blog;
-        $blog->judul = $request->get('judul');
-        $blog->artikel = $request->get('article');
-        $blog->gambar = $name;
-        $blog->save();
+        $buku = new Buku;
+        $buku->judul = $request->get('judul');
+        $buku->pengarang = $request->get('pengarang');
+        $buku->penerbit = $request->get('penerbit');
+        $buku->tahun = $request->get('tahun');
+        $buku->stok = $request->get('stok');
+        $buku->gambar = $name;
+        $buku->save();
 
-        return redirect('admin/blog')->with('success', 'Blog berhasil disimpan');
+        return redirect('admin/buku')->with('success', 'Buku berhasil disimpan');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Blog  $blog
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Blog $blog)
+    public function show($id)
     {
         //
     }
 
-
-
-
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Blog  $blog
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Blog $blog)
+    public function edit($id)
     {
-        //
+        
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Blog  $blog
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        $blog = Blog::finnd($id);
-        $blog->judul = $request->get('judul');
-        $blog->artikel = $request->get('article');
-        $blog->update();
-        return redirect('admin/blog')->with('Success', 'Information has been updated');
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Blog  $blog
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $blog = Blog::find($id);
-        $blog-> delete();
-        return redirect('admin/blog')->with('Success', 'Information has been deleted');
-    }
-
-    public function edit_blog($id)
-    {
-        $blog = Blog::find($id);
-        return view('blog/edit', compact('blog', 'id'));
+        //
     }
 }

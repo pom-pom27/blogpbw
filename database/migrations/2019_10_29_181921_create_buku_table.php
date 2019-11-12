@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateBlogsTable extends Migration
+class CreateBukuTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,14 @@ class CreateBlogsTable extends Migration
      */
     public function up()
     {
-        Schema::create('blogs', function (Blueprint $table) {
+        Schema::create('bukus', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('judul');
+            $table->string('pengarang');
+            $table->string('penerbit');
+            $table->string('tahun');
+            $table->string('stok');
             $table->string('gambar')->nullable();
-            $table->longText('artikel');
             $table->timestamps();
         });
     }
