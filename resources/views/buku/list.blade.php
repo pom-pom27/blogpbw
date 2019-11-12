@@ -44,12 +44,12 @@
               <td> {{ $Buku->stok }} </td>
               <td> {{ $Buku->created_at }} </td>
              
-              <td> <a href="{{ url('admin/edit_buku', $Buku->id) }}" class="btn btn-success"> Edit </a> </td>
+              <td> <a href="{{ url('admin/edit_buku', $Buku->id) }}" class="btn btn-success"><i class="fas fa-edit"></i> Edit </a> </td>
               <td>
                 <form action="{{ url('admin/buku', $Buku->id) }}" method="post">
                   @csrf
                   <input type="hidden" name="_method" value="DELETE">
-                  <button type="submit" onclick="return confirm('Are you sure ?')" class="btn btn-danger"> Delete </button>
+                  <button type="submit" onclick="return confirm('Are you sure ?')" class="btn btn-danger"><i class="far fa-trash-alt"></i> Delete </button>
                 </form>
               </td>
             </tr>
